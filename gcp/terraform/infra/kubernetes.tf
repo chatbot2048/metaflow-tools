@@ -23,6 +23,9 @@ resource "google_container_cluster" "metaflow_kubernetes" {
     workload_metadata_config {
       mode = "GKE_METADATA"
     }
+    shielded_instance_config {
+      enable_secure_boot = true
+    }
   }
   cluster_autoscaling {
     enabled = true

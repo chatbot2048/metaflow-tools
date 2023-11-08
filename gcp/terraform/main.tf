@@ -101,7 +101,7 @@ module "services" {
   metaflow_db_user                    = "metaflow"
   metaflow_db_password                = "metaflow"
   metaflow_db_port                    = 5432
-  project                             = var.project
+  project                             = var.project 
   db_connection_name                  = data.google_sql_database_instance.default.connection_name
   metaflow_workload_identity_gsa_id   = module.infra.metaflow_workload_identity_gsa_id
   metaflow_workload_identity_gsa_name = local.metaflow_workload_identity_gsa_name

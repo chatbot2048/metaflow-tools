@@ -20,9 +20,18 @@ resource "kubernetes_deployment" "metaflow-ui-backend-service" {
         service_account_name = kubernetes_service_account.metaflow_service_account.metadata[0].name
         container {
           name = "metaflow-ui-backend-service-cloud-sql-proxy"
-          image = "gcr.io/cloudsql-docker/gce-proxy:1.28.0"
-          command = ["/cloud_sql_proxy", "-ip_address_types=PRIVATE", "-log_debug_stdout",
-            "-instances=${var.db_connection_name}=tcp:${var.metaflow_db_port}"]
+          # image = "gcr.io/cloudsql-docker/gce-proxy:1.28.0"
+          # command = ["/cloud_sql_proxy", "-ip_address_types=PRIVATE", "-log_debug_stdout",
+          #   "-instances=${var.db_connection_name}=tcp:${var.metaflow_db_port}"]
+
+          image = "gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.7.1"
+          args = [
+            "--private-ip",
+            "--structured-logs",
+            "--port=${var.metaflow_db_port}",
+            "${var.db_connection_name}"
+          ]
+
           security_context {
             run_as_non_root = true
           }

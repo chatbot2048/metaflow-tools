@@ -1,5 +1,6 @@
 .idea/
 **/.terraform
 **/terraform.tfstate*
-**/kubeconfig_*
+**/kubeconfig*
 !**/kubeconfig_template.yaml
+**/metaflow_gsa_key_default.json*
